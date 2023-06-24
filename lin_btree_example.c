@@ -1,5 +1,6 @@
 #include "lin_btree.h"
 #include <stdbool.h>
+#include <stdio.h>
 
 typedef struct
 {
@@ -16,11 +17,11 @@ int foo_cmp_cb(void *key, void *elem)
     uint32_t *key_ = (uint32_t *)key;
     foo_t *elem_ = (foo_t *)elem;
 
-    if (key_ > elem_->key)
+    if (*key_ > elem_->key)
     {
         return 1;
     }
-    else if (key < elem_->key)
+    else if (*key_ < elem_->key)
     {
         return -1;
     }
@@ -57,17 +58,17 @@ int main()
 
     key = 10;
     found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
-    printf("Key %lu: %s", key, found ? "FOUND" : "NOT FOUND");
+    printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 67;
     found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
-    printf("Key %lu: %s", key, found ? "FOUND" : "NOT FOUND");
+    printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 90;
     found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
-    printf("Key %lu: %s", key, found ? "FOUND" : "NOT FOUND");
+    printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 10020;
     found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
-    printf("Key %lu: %s", key, found ? "FOUND" : "NOT FOUND");
+    printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 }

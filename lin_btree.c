@@ -1,21 +1,24 @@
 #include "lin_btree.h"
+#include <assert.h>
+
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
 
 static void rotate(void *arr, const size_t elem_size, const size_t elem_cnt, int32_t d);
 static void reverse(void *arr, const size_t elem_size, const size_t elem_cnt);
 static void inv_faro(void *arr, const size_t elem_size, const size_t elem_cnt);
 
-void lin_bst_from_sorted_array(void *arr, const size_t elem_size, const size_t elem_cnt)
+void complete_btree_from_array(void *arr, const size_t elem_size, const size_t elem_cnt)
 {
     uint8_t h = 1;
-    while ((2 << h) - 1 < elem_cnt)
+    while ((size_t)(2 << h) - 1 < elem_cnt)
     {
         h++;
     }
 
     for (uint8_t lvl = h; lvl > 0; lvl--)
     {
-        size_t es = MIN((2 << lvl) - 1, elem_cnt);
-        size_t lc = MIN(1 << lvl, elem_cnt - ((1 << lvl) - 1));
+        size_t es = MIN((size_t)(2 << lvl) - 1, elem_cnt);
+        size_t lc = MIN((size_t)(1 << lvl), elem_cnt - ((1 << lvl) - 1));
 
         inv_faro(arr, elem_size, 2 * lc - 1);
         rotate(arr, elem_size, es, lc);
@@ -23,16 +26,16 @@ void lin_bst_from_sorted_array(void *arr, const size_t elem_size, const size_t e
 }
 
 void *linear_bst_search(const void *arr,
-                     const size_t elem_size,
-                     const size_t elem_cnt, void *key,
-                     int (*cmp_cb)(void *key, void *node))
+                        const size_t elem_size,
+                        const size_t elem_cnt, void *key,
+                        int (*cmp_cb)(void *key, void *node))
 {
     assert(cmp_cb != NULL);
 
     size_t i = 0;
     while (i < elem_cnt)
     {
-        int cmp_res = cmp_cb(key, arr + elem_size * i);
+        int cmp_res = cmp_cb(key, (uint8_t *)arr + elem_size * i);
         if (cmp_res > 0)
         {
             i = 2 * i + 2;
@@ -43,7 +46,7 @@ void *linear_bst_search(const void *arr,
         }
         else
         {
-            return arr + elem_size * i;
+            return (void *)((uint8_t *)arr + elem_size * i);
         }
     }
 
@@ -53,7 +56,7 @@ void *linear_bst_search(const void *arr,
 static void reverse(void *arr, const size_t elem_size, const size_t elem_cnt)
 {
     uint8_t *front = arr;
-    uint8_t *back = arr + (elem_cnt - 1) * elem_size;
+    uint8_t *back = front + (elem_cnt - 1) * elem_size;
 
     while (front < back)
     {
@@ -75,10 +78,13 @@ static void reverse(void *arr, const size_t elem_size, const size_t elem_cnt)
 static void rotate(void *arr, const size_t elem_size, const size_t elem_cnt, int32_t d)
 {
     d = d % elem_cnt;
-    d = (d < 0) ? d + elem_cnt : d;
+    if (d < 0)
+    {
+        d = d + elem_cnt;
+    }
 
     reverse(arr, elem_size, d);
-    reverse(arr + d * elem_size, elem_size, elem_cnt - d);
+    reverse((uint8_t *)arr + d * elem_size, elem_size, elem_cnt - d);
     reverse(arr, elem_size, elem_cnt);
 }
 
