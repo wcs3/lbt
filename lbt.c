@@ -7,7 +7,7 @@ static void rotate(void *arr, const size_t elem_size, const size_t elem_cnt, int
 static void reverse(void *arr, const size_t elem_size, const size_t elem_cnt);
 static void inv_faro(void *arr, const size_t elem_size, const size_t elem_cnt);
 
-void complete_btree_from_array(void *arr, const size_t elem_size, const size_t elem_cnt)
+void lbt_from_array(void *arr, const size_t elem_size, const size_t elem_cnt)
 {
     uint8_t h = 1;
     while ((size_t)(2 << h) - 1 < elem_cnt)
@@ -25,7 +25,7 @@ void complete_btree_from_array(void *arr, const size_t elem_size, const size_t e
     }
 }
 
-void *linear_bst_search(const void *arr,
+void *lbst_search(const void *arr,
                         const size_t elem_size,
                         const size_t elem_cnt, void *key,
                         int (*cmp_cb)(void *key, void *node))
