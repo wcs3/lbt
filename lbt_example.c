@@ -49,7 +49,7 @@ int main()
     size_t arr_elem_size = sizeof(sorted_array[0]);
     size_t arr_elem_cnt = sizeof(sorted_array) / sizeof(sorted_array[0]);
 
-    complete_btree_from_array(sorted_array, arr_elem_size, arr_elem_cnt);
+    lbt_from_array(sorted_array, arr_elem_size, arr_elem_cnt);
 
     foo_t *bst = sorted_array;
 
@@ -57,18 +57,18 @@ int main()
     bool found;
 
     key = 10;
-    found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
+    found = lbst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
     printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 67;
-    found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
+    found = lbst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
     printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 90;
-    found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
+    found = lbst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
     printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 
     key = 10020;
-    found = linear_bst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
+    found = lbst_search(bst, arr_elem_size, arr_elem_cnt, &key, &foo_cmp_cb) != NULL;
     printf("Key %u: %s\n", key, found ? "FOUND" : "NOT FOUND");
 }
