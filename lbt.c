@@ -1,4 +1,4 @@
-#include "lin_btree.h"
+#include "lbt.h"
 #include <assert.h>
 
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
