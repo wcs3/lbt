@@ -28,7 +28,7 @@
  * @param elem_size size of single array element in bytes
  * @param elem_cnt number of elements in array
  */
-void complete_btree_from_array(void *arr,
+void lbt_from_array(void *arr,
                                const size_t elem_size,
                                const size_t elem_cnt);
 
@@ -55,7 +55,7 @@ void complete_btree_from_array(void *arr,
  * @param cmp_cb key comparison callback
  * @return pointer to node if found, NULL if not.
  */
-void *linear_bst_search(const void *lin_bst,
+void *lbst_search(const void *lin_bst,
                      const size_t elem_size,
                      const size_t elem_cnt,
                      void *key,
