@@ -1,4 +1,4 @@
-#include "lin_btree.h"
+#include "lbt.h"
 #include <stdbool.h>
 #include <stdio.h>
 
