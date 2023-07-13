@@ -26,9 +26,9 @@ void lbt_from_array(void *arr, const size_t elem_size, const size_t elem_cnt)
 }
 
 void *lbst_search(const void *arr,
-                        const size_t elem_size,
-                        const size_t elem_cnt, void *key,
-                        int (*cmp_cb)(void *key, void *node))
+                  const size_t elem_size,
+                  const size_t elem_cnt, void *key,
+                  int (*cmp_cb)(void *key, void *node))
 {
     assert(cmp_cb != NULL);
 
