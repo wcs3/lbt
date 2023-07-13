@@ -1,5 +1,5 @@
-#ifndef __LIN_BST_H__
-#define __LIN_BST_H__
+#ifndef __LBT_H__
+#define __LBT_H__
 
 #include <stdint.h>
 #include <stddef.h>
@@ -61,4 +61,4 @@ void *linear_bst_search(const void *lin_bst,
                      void *key,
                      int (*cmp_cb)(void *key, void *node));
 
-#endif // __LIN_BST_H__
+#endif // __LBT_H__
